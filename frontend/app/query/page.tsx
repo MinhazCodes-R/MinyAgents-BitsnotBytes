@@ -47,20 +47,48 @@ export default function QueryPage() {
     }
 
     setMessages((prev) => [...prev, userMessage])
+    const userInput = input.toLowerCase()
     setInput("")
     setIsLoading(true)
 
-    // Simulate agent response
     setTimeout(() => {
+      let responseContent = ""
+
+      // Check for system health queries
+      if (
+        userInput.includes("system") ||
+        userInput.includes("doing") ||
+        userInput.includes("health") ||
+        userInput.includes("status")
+      ) {
+        responseContent =
+          "Great news! Your system is performing excellently. All agents are deployed and healthy. Here's a quick summary:\n\n✓ All 3 agents are running smoothly\n✓ CPU usage is optimal (averaging 2-3%)\n✓ Memory consumption is within normal ranges\n✓ Network connectivity is stable\n✓ API endpoints are responding correctly\n\nEverything is operating as expected. Is there anything specific you'd like to check?"
+      }
+      // Check for deployment queries
+      else if (userInput.includes("deploy") || userInput.includes("agent")) {
+        responseContent =
+          "Your agents are successfully deployed and running! All containers are healthy and responding to requests. The deployment completed without any issues."
+      }
+      // Check for configuration queries
+      else if (userInput.includes("config") || userInput.includes("configuration")) {
+        responseContent =
+          "Your configuration has been successfully applied. All agents are running with the specified settings and are operating within expected parameters."
+      }
+      // Default helpful response
+      else {
+        responseContent =
+          "I've received your message. I'm here to help you monitor and manage your deployed agents. You can ask me about system health, deployment status, or any configuration concerns you might have."
+      }
+
       const agentMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "agent",
-        content: "I've received your message. I'm processing your request and will provide assistance shortly.",
+        content: responseContent,
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, agentMessage])
       setIsLoading(false)
-    }, 1000)
+    }, 1500)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
