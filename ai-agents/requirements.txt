@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+python-dotenv
+# Optional (install if you plan to use LangChain + OpenAI integration):
+# langchain
+# langchain-openai
+# openai
+# Note: pin versions in your environment as needed
