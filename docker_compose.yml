@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  agent1:
+    build:
+      context: .
+      dockerfile: ./agent1/Dockerfile
+    container_name: agent1
+    ports:
+      - "7001:8000"
+    env_file:
+      - .env
+    networks:
+      - agentnet
+    depends_on:
+      - agent2
+      - agent3
+
+  agent2:
+    build:
+      context: .
+      dockerfile: ./agent2/Dockerfile
+    container_name: agent2
+    ports:
+      - "7002:8000"
+    env_file:
+      - .env
+    networks:
+      - agentnet
+    depends_on:
+      - agent3
+
+  agent3:
+    build:
+      context: .
+      dockerfile: ./agent3/Dockerfile
+    container_name: agent3
+    ports:
+      - "7003:8000"
+    env_file:
+      - .env
+    networks:
+      - agentnet
+
+networks:
+  agentnet:
+    driver: bridge
