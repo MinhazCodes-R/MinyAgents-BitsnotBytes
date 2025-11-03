@@ -28,7 +28,6 @@ This builds all containers (agent1, agent2, agent3, and frontend if included) an
 
 
 Access the services  
-Service	URL
 agent1	http://localhost:7001/invoke  
 agent2	http://localhost:7002/invoke  
 agent3	http://localhost:7003/invoke  
