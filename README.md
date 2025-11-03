@@ -20,9 +20,10 @@ Participant Names -
 
 ## Run the project
 
-### Option 1: Build and run everything
+### Build and run everything
 ```bash
 docker compose up --build
+```
 This builds all containers (agent1, agent2, agent3, and frontend if included) and starts them.
 
 
