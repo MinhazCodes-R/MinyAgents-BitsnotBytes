@@ -42,6 +42,16 @@ services:
     networks:
       - agentnet
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"  # host:container (hostPort:containerPort)
+    networks:
+      - agentnet  # same network as backend agents
+
 networks:
   agentnet:
     driver: bridge
